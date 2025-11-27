@@ -1,0 +1,8 @@
+
+I designed its functionality and simplicity so the communication of each service is not redundant and contradict. for example Service that contains detailed business logic and workflow, Controller for the function that will be called from the API route, Tool for wrapping for external systems (storage). The separation will give effect more modular, responsibilities are clear, and components are easier to trace and test. Let's say using Python Debug.
+
+I think the trade-off I feel the most is that i end up with more files and a bigger code structure to manage. Sometimes it looks a bit confusing at first, because a lot of files, but when get into specific file, the code is easy to read because of its micro-manage, but actually it’s great for scalability.  It makes it easier to add new features without breaking the old ones. New developers / teammates can understand the structure more easily, testing becomes simpler, and overall maintainability gets better. So basically, i sacrifice a bit of time and effort upfront to keep the structure clean, and in the long run the system becomes way easier to develop, scale, and maintain.
+
+It makes things easier to maintain because everything’s organized and separated clearly, so i can update or fix stuff without breaking anything else (i can focus on specific file only). Even though there are more files, the structure is predictable, so working on the code feels way smoother.
+
+                                                - Fadhil WNR
