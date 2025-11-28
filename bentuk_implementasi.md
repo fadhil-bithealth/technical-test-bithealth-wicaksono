@@ -1,4 +1,4 @@
-## Project Implementation — Deskripsi Implementasi (nyata)
+## Project Implementation
 
 Tujuan
 - Dokumen ini menjelaskan implementasi berdasarkan kode yang ada di repo. Fokus pada arsitektur, pemetaan file, endpoint HTTP yang tersedia, variabel environment, cara menjalankan dan catatan perilaku (tanpa berandai-andai).
