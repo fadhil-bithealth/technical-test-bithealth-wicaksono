@@ -19,7 +19,7 @@ Pemetaan file kunci
 - `app/config/qdrant.py`: wrapper Qdrant (`QdrantDB`) untuk index/search.
 - `app/schemas/*.py`: pydantic schema untuk request/response (mis. `QuestionRequest`, `DocumentRequest`, `AskResponse`, `AddDocumentResponse`).
 
-Endpoint HTTP (yang tersedia sekarang)
+Endpoint HTTP
 - `POST /ask`
   - Request: `{"question": "..."}` (schema: `QuestionRequest`).
   - Response: `AskResponse` {`question`, `answer`, `context_used`, `latency_sec`}.
@@ -55,8 +55,7 @@ Variabel environment yang wajib/berguna (ada di `app/config/setting.py`)
 - Fallback in-memory:
   - Jika Qdrant tidak tersedia, `DocumentStoringTool` menyimpan dokumen di `self.docs_memory` dan melakukan pencarian teks sederhana (`in` pada lowercase).
 
-Cara menjalankan (lokal)
-1. Buat file `.env` di root berisi variabel yang diperlukan (minimal contoh):
+1. env
 
 ```
 APP_NAME=technical_test
@@ -66,50 +65,15 @@ QDRANT_COLLECTION_NAME=docs
 VECTOR_SIZE=128
 ```
 
-2. Install dependencies (direferensikan di `requirements.txt`):
 
 ```bash
-python3 -m pip install -r requirements.txt
+curl -X POST "http://localhost:8000/add" -H "Content-Type: application/json" -d '{"text":"Bithealth adalah perusahaan terbaik di dunia"}'
 ```
-
-3. Jalankan aplikasi:
 
 ```bash
-python3 main.py
+curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d '{"question":"Apakah Bithealth perusahaan terbaik ?"}'
 ```
-
-Atau langsung dengan uvicorn (mengambil `app` dari `app.Kernel`):
-
-```bash
-uvicorn app.Kernel:app --host 0.0.0.0 --port 8000
-```
-
-Docker
-- Repo berisi `Dockerfile` dan `docker-compose.yaml` — untuk deploy cepat, jalankan:
-
-```bash
-docker-compose up --build -d
-```
-
-Catatan pengujian manual (quick checks)
-- Tambah dokumen:
-
-```bash
-curl -X POST "http://localhost:8000/add" -H "Content-Type: application/json" -d '{"text":"Indonesia Merdeka"}'
-```
-
-- Tanyakan sesuatu:
-
-```bash
-curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d '{"question":"Apakah Indonesia Merdeka?"}'
-```
-
-- Cek status:
 
 ```bash
 curl "http://localhost:8000/status"
 ```
-
-Dependencies utama
-- Terlihat di `requirements.txt`: `fastapi`, `uvicorn`, `pydantic`, `langgraph`, `qdrant-client`.
-
